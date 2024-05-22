@@ -1,0 +1,117 @@
+.backbutton{
+    padding-top: 2vh;
+    padding-left: 3vh;
+    padding-bottom: 2vh;
+}
+.search-friend{
+    width: 100%;
+    padding-left: 3vh;
+    padding-right: 3vh;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+}
+.find-friend{
+    flex: 1;
+    border: 1px solid gray;
+
+    height: 100%;
+    font-family: inherit;
+}
+
+input[type="text"]{
+    padding-left: 15px;
+}
+
+.find-friend-button{
+    width: 20%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: gray;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: 1s;
+
+}
+.find-friend-button:hover{
+    color: white;
+}
+
+/* notification starts here */
+
+
+.notification-container{
+    width: 100%;
+    padding-left: 3vh;
+    padding-right: 3vh;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+}
+.notification-for-like,
+.notification-for-friend{
+    display: flex;
+    width: 100%;
+    min-height: 6vh;
+    border: 1px solid gray;
+    margin-bottom: 1vh;
+    border-radius: 5px;
+}
+.like-profile,
+.friend-profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2vw;
+}
+.profile-pic{
+    width: 4vh;
+    height: 4vh;
+    border-radius: 50%;
+    background-color: rebeccapurple;
+}
+
+.like-information,
+.friend-information{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 1%;
+    position: relative;
+}
+.always-red{
+    color: red;
+}
+
+.friend-information{
+    flex-direction: column;
+    gap: 1vh;
+}
+.interaction-requests{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+    padding-bottom: 3%;
+}
+.accept-friend,
+.decline-friend{
+    padding: 2%;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+.like-time{
+    font-size: 0.7rem;
+    color: gray;
+    position: absolute;
+    bottom: 0px;
+    right: 14px;
+}

@@ -1,0 +1,153 @@
+*,::after,::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+    color: inherit;
+    text-decoration: none;
+}
+body{
+    font-size: 1rem;
+}
+.top_nav{
+    display: flex;
+    background-color: gray;
+    padding: 2vh;
+    justify-content: space-around;
+    align-items: center;
+}
+.right_nav{
+    width: 80%;
+    display: flex;
+    justify-content: end;
+    gap: 5%;
+}
+.left-nav{
+    flex : 1;
+}
+.newpostcontainer{
+    width: 100vw;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.create_post{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:rgb(212, 212, 212);
+    padding: 2%;
+    border-radius: 5px;
+    
+}
+.profilepic{
+    display: block;
+    background-color: cyan;
+    width: 76px;
+    height: 76px;
+    border-radius: 100%;
+}
+.right_post{
+    min-width: 80%;
+}
+.right_post > span{
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 2%;
+}
+.postform{
+    width: 100%;
+    height: 80%;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid gray;
+}
+.create_post_button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    height: 3vh;
+    margin-top: 1%;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1em;
+    background-color: white;
+    cursor: pointer;
+    height: 5vh;
+}
+
+.left_post{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6%;
+}
+.name{
+    text-align: center;
+    margin : 5%;
+}
+textarea{
+    resize: none;
+    padding-top: 2%;
+    padding-left: 2%;
+    font-family: inherit;
+    color: black;
+}
+/* feed starts here */
+.profilepicsmall{
+    width: 32px;
+    height: 32px;
+}
+.profilepicmini{
+    width: 22px;
+    height: 22px;
+}
+.feed-items{
+    height:fit-content;
+    background-color:rgb(238, 236, 236);
+    margin: 2%;
+    border-radius: 5px;
+}
+.top-feed{
+    display: flex;
+    gap: 5vw;
+}
+.feed-postername{
+    font-size: 1.2em;
+}
+.feed-postdate{
+    font-size: 0.6em;
+    color: rgb(44, 44, 44);
+}
+.mid-feed{
+    text-align: justify;
+    padding-top: 1vh;
+}
+.reaction-feed{
+    display: flex;
+    width: 100%;
+    gap: 5%;
+    margin-top: 2vh;
+    background-color:rgb(212, 212, 212);
+    border-radius: 5px;
+}
+.comments{
+    flex:1;
+}
+.top-feed, .mid-feed, .reaction-feed {
+    padding: 2%;
+}
+.feed-links{
+    color: aqua;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
