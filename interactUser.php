@@ -33,7 +33,7 @@ function createNewRelation($user1, $user2)
         return false;
     }
     global $conn;
-    $check_if_relation_exists = "SELECT * from relations WHERE (('req_from' = ? AND 'req_to' = ?) OR ('req_from' = ? AND 'req_to' = ?)) LIMIT 1";
+    $check_if_relation_exists = "SELECT * from relations WHERE ((req_from = ? AND req_to = ?) OR (req_from = ? AND req_to = ?)) LIMIT 1";
     $stmt = $conn->prepare($check_if_relation_exists);
     $stmt->bind_param('ssss', $user1, $user2, $user2, $user1);
     $stmt->execute();
