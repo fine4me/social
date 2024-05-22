@@ -65,9 +65,10 @@ $users = searchUsers($_GET['q']);
                 $html .= '    </div>';
                 $html .= '    <div class="user-end">';
                 $html .= '        <div class="add-user">';
-                $html .= '            <button class="adduser user-add-view" id="' .'add-user-'. $user['username'] . '">Add</button>';
+                $html .= '            <button class="adduser user-add-view" id="' .'add-user-'. $user['id'] . '">Add</button>';
                 $html .= '        </div>';
                 $html .= '        <div class="view-profile">';
+//                there will be a hyperlink to the button below to redirect it to new page
                 $html .= '            <button class="userprofile user-add-view" id="' .'view-user-'. $user['username'] . ' ">Profile</button>';
                 $html .= '        </div>';
                 $html .= '    </div>';

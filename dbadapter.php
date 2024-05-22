@@ -84,10 +84,10 @@ mysqli_query($conn, "
 mysqli_query($conn,"
     CREATE TABLE IF NOT EXISTS `relations`(
       `id` INT AUTO_INCREMENT PRIMARY KEY,
-       `req_from` INT,
-       `req_to` INT,
+       `req_from` INT NOT NULL,
+       `req_to` INT NOT NULL,
        `status` TINYINT(1) DEFAULT 0,
-        `timestamp` INT,
+        `timestamp` INT NOT NULL,
         FOREIGN KEY (`req_from`) REFERENCES `users`(`id`),
         FOREIGN KEY (`req_to`) REFERENCES `users`(`id`)
     );

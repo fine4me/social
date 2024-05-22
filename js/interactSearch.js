@@ -17,7 +17,7 @@ function checkInteraction(e) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
-                console.log(xhr.responseText);
+                e.target.textContent = "Cancel";
             } else {
                 console.log("Server error", xhr.responseText);
             }
