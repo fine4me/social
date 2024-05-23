@@ -130,15 +130,14 @@ function getEventTimestamp()
     return $last_opened_timestamp;
 }
 
-function getUserName($userId){
+function getUserDetails($userId){
     global $conn, $user_id;
-    $query = "SELECT username FROM users WHERE id = ?";
+    $query = "SELECT * FROM users WHERE id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-    $username = $row['username'];
     $stmt->close();
-    return $username;
+    return $row;
 }

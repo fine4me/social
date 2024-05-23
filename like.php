@@ -59,7 +59,7 @@ function toggle_like($postId)
         $stmt = $conn->prepare("INSERT INTO likes (user_id, post_id, like_timestamp) VALUES (?, ?, ?)");
         $txtc = "Your post has been liked by " . $user_data['username'];
         $type = "like";
-        CreateNotification($post_author_idt, $postId,$type, $txtc, $user_data['user_id']);
+        CreateNotification($post_author_id, $postId,$type, $txtc, $user_data['user_id']);
         $stmt->bind_param("iii", $userId, $postId, $liketime);
         $stmt->execute();
         $stmt->close();
@@ -86,4 +86,18 @@ function CreateNotification($user_id, $postId, $type,$cont, $extref){
     $stmt_delete_notif->bind_param("iisisi", $user_id, $postId, $type, $liketime, $cont, $extref);
     $stmt_delete_notif->execute();
     $stmt_delete_notif->close();
+}
+
+function returnFriendInfo($user_id)
+{
+    global $conn;
+    $status = 1;
+    $stmt = $conn->prepare("
+        SELECT * FROM relations WHERE (req_from = ? OR req_to = ?) AND status = ?;
+    ");
+    $stmt->bind_param("iii", $user_id, $user_id, $status);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    return $result->fetch_assoc();
 }

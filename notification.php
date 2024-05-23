@@ -50,6 +50,8 @@ echo returnHeader();
                                 </div>
                         </div>';
                 } else if ($notification['type'] == 'request') {
+                    $userDetail = getUserDetails( $notification['extra']);
+                    $username = $userDetail['username'];
                     echo '     <div class="like-information"> ';
                     echo '
                                     ' . $notification['content'] . '<i class="fa-solid fa-user-group always-red" ></i>
@@ -58,14 +60,14 @@ echo returnHeader();
                                     </span>
                                     ';
                     echo '
-<div class="user-end" onclick="hide(this)">
-    <div class="add-user">
-        <button class="adduser user-add-view" id="add-user-' . $notification['extra'] . '">Accept</button>
-    </div>
-    <div class="view-profile">
-        <button class="userprofile user-add-view" id="view-user-' . getUserName( $notification['extra']) . '">Profile</button>
-    </div>
-</div>';
+                                <div class="user-end" onclick="hide(this)">
+                                    <div class="add-user">
+                                        <button class="adduser user-add-view" id="add-user-' . $notification['extra'] . '">Accept</button>
+                                    </div>
+                                    <div class="view-profile">
+                                        <button class="userprofile user-add-view" id="view-user-' . $username . '">Profile</button>
+                                    </div>
+                                </div>';
                     echo '
                                 </div>
                         </div>';
@@ -83,6 +85,5 @@ echo returnHeader();
     function hide(e) {
         console.log(e);
         e.parentElement.parentElement.classList.add('hidden');
-
     }
 </script>
