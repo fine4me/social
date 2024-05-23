@@ -47,11 +47,8 @@ $users = searchUsers($_GET['q']);
     <div class="search-result">Search Results found <span><?php echo count($users); ?></span> </div>
     <div class="results-con">
        <?php
-
-
             foreach ($users as $user){
-                $html = "";
-                $html .= '<div class="search-username" id="user-' . $user['id'] . '">';
+                $html = '<div class="search-username" id="user-' . $user['id'] . '">';
                 $html .= '    <div class="user-left">';
                 $html .= '        <span class="profile-pic"></span>';
                 $html .= '    </div>';
@@ -75,7 +72,6 @@ $users = searchUsers($_GET['q']);
                 $html .= '</div>';
                 echo $html;
             }
-
        ?>
     </div>
 </div>
@@ -85,5 +81,3 @@ $users = searchUsers($_GET['q']);
 <script src="./js/handle_likes.js"></script>
 <script src="./js/handle_notification.js"></script>
 <script src="./js/interactSearch.js"></script>
-<?php
-

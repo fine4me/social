@@ -28,15 +28,12 @@ function toggle_like($postId)
     global $conn, $user_data;
     $userId = $user_data['user_id'];
     $hasliked = false;
-
-    $post_author_id = 0;
     $postauthorstmt = $conn->prepare("SELECT user_id FROM posts WHERE id = ?");
     $postauthorstmt->bind_param("i", $postId);
     $postauthorstmt->execute();
     $result = $postauthorstmt->get_result();
     $post_author_id = $result->fetch_assoc()['user_id'];
     $postauthorstmt->close();
-
     $stmt = $conn->prepare("SELECT * FROM likes WHERE user_id = ? AND post_id = ?");
     $stmt->bind_param("ii", $userId, $postId);
     $stmt->execute();
@@ -60,7 +57,6 @@ function toggle_like($postId)
     } else {
         $liketime = time();
         $stmt = $conn->prepare("INSERT INTO likes (user_id, post_id, like_timestamp) VALUES (?, ?, ?)");
-
         $txtc = "Your post has been liked by " . $user_data['username'];
         $stmt_delete_notif = $conn->prepare("INSERT INTO notifications (user_id, post_id, type, timestamp, content,extref) VALUES (?, ?, 'like', ?, ?,?)");
         $stmt_delete_notif->bind_param("iiiss", $post_author_id, $postId, $liketime, $txtc, $user_data['user_id']);
