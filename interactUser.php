@@ -1,5 +1,6 @@
 <?php
 include_once './utils.php';
+include_once './like.php';
 global $userData;
 $userData = checkLogin();
 
@@ -56,6 +57,15 @@ function createNewRelation($user1, $user2)
         $stmt->bind_param('iii', $user1, $user2, $time);
         $stmt->execute();
         $stmt->close();
+        $stmt_username = $conn->prepare("SELECT username FROM users WHERE id = ?");
+        $stmt_username->bind_param('i', $user1);
+        $stmt_username->execute();
+        $result = $stmt_username->get_result();
+        $check_row = $result->fetch_assoc();
+        $stmt_username->close();
+        $username = $check_row['username'];
+        $txtc = "Friend request from " . $username;
+        CreateNotification($user2, null, 'request', $txtc, $user1);
         return true;
     }
 }

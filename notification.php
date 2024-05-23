@@ -36,18 +36,27 @@ echo returnHeader();
             foreach ($notifications as $notification) {
                 // Handle each notification...
                 echo '<div class="notification-for-like">
-            <div class="like-profile">
-                <span class="profile-pic"></span>
-            </div>
-            <div class="like-information">
-                <!-- generate the whole line -->
-                '.$notification['content'].'<i class="fa-regular fa-heart always-red"></i>
-                <span class="like-time">
-                '.$notification['created_time'].'
-                </span>
-        </div>
-        </div>
-        ';
+                            <div class="like-profile">
+                                <span class="profile-pic"></span>
+                            </div>';
+                if ($notification['type'] == 'like') {
+                    echo '     <div class="like-information">
+                                <!-- generate the whole line -->
+                                    ' . $notification['content'] . '<i class="fa-regular fa-heart always-red"></i>
+                                    <span class="like-time">
+                                    ' . $notification['created_time'] . '
+                                    </span>
+                                </div>
+                        </div>';
+                } else if ($notification['type'] == 'request') {
+                    echo '     <div class="like-information">
+                                    ' . $notification['content'] . '<i class="fa-solid fa-user-group always-red" ></i>
+                                    <span class="like-time">
+                                    ' . $notification['created_time'] . '
+                                    </span>
+                                </div>
+                        </div>';
+                }
             }
             ?>
         </div>

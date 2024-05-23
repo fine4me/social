@@ -58,11 +58,8 @@ function toggle_like($postId)
         $liketime = time();
         $stmt = $conn->prepare("INSERT INTO likes (user_id, post_id, like_timestamp) VALUES (?, ?, ?)");
         $txtc = "Your post has been liked by " . $user_data['username'];
-        $stmt_delete_notif = $conn->prepare("INSERT INTO notifications (user_id, post_id, type, timestamp, content,extref) VALUES (?, ?, 'like', ?, ?,?)");
-        $stmt_delete_notif->bind_param("iiiss", $post_author_id, $postId, $liketime, $txtc, $user_data['user_id']);
-        $stmt_delete_notif->execute();
-        $stmt_delete_notif->close();
-
+        $type = "like";
+        CreateNotification($post_author_id, $postId,$type, $txtc, $user_data['user_id']);
         $stmt->bind_param("iii", $userId, $postId, $liketime);
         $stmt->execute();
         $stmt->close();
@@ -79,4 +76,14 @@ function countLikes ($postId)
     $result = $stmt->get_result();
     $stmt->close();
     return $result->fetch_assoc()['total_likes'];
+}
+
+function CreateNotification($user_id, $postId, $type,$cont, $extref){
+    global $conn;
+    $liketime = time();
+    $txtc = $cont;
+    $stmt_delete_notif = $conn->prepare("INSERT INTO notifications (user_id, post_id, type, timestamp, content, extref) VALUES (?, ?, ? , ?, ?,?)");
+    $stmt_delete_notif->bind_param("iisisi", $user_id, $postId, $type, $liketime, $cont, $extref);
+    $stmt_delete_notif->execute();
+    $stmt_delete_notif->close();
 }

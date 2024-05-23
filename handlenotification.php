@@ -31,6 +31,7 @@ function getNotifications() :array
             'content' => $row['content'],
             'image' => $profile_pic,
             'created_time' => getTimeAgo($row['timestamp']),
+            'type' => $row['type'],
             'is_seen' => $row['timestamp'] <= $last_opened_timestamp,
         );
         // Add notification to notifications array
