@@ -1,3 +1,4 @@
+const xhr = new XMLHttpRequest();
 function setEventsToProfile() {
     // Add event listener to elements with the class 'like-post' and trigger checkInteraction function on click, do not add if event handler is already attached
     document.querySelectorAll('.user-add-view').forEach(element => {

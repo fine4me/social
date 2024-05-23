@@ -32,6 +32,7 @@ function getNotifications() :array
             'image' => $profile_pic,
             'created_time' => getTimeAgo($row['timestamp']),
             'type' => $row['type'],
+            'extra' => $row['extref'],
             'is_seen' => $row['timestamp'] <= $last_opened_timestamp,
         );
         // Add notification to notifications array
@@ -127,4 +128,17 @@ function getEventTimestamp()
     }
     $stmt->close();
     return $last_opened_timestamp;
+}
+
+function getUserName($userId){
+    global $conn, $user_id;
+    $query = "SELECT username FROM users WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $username = $row['username'];
+    $stmt->close();
+    return $username;
 }

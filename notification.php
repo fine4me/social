@@ -12,6 +12,7 @@ include_once ('./handlenotification.php');
     <title>Notifications -Alerts</title>
     <link rel="stylesheet" href="./css/home.css">
     <link rel="stylesheet" href="./css/alert.css">
+    <link rel="stylesheet" href="./css/search.css">
 </head>
 <body>
 <?php
@@ -49,11 +50,23 @@ echo returnHeader();
                                 </div>
                         </div>';
                 } else if ($notification['type'] == 'request') {
-                    echo '     <div class="like-information">
+                    echo '     <div class="like-information"> ';
+                    echo '
                                     ' . $notification['content'] . '<i class="fa-solid fa-user-group always-red" ></i>
                                     <span class="like-time">
                                     ' . $notification['created_time'] . '
                                     </span>
+                                    ';
+                    echo '
+<div class="user-end" onclick="hide(this)">
+    <div class="add-user">
+        <button class="adduser user-add-view" id="add-user-' . $notification['extra'] . '">Accept</button>
+    </div>
+    <div class="view-profile">
+        <button class="userprofile user-add-view" id="view-user-' . getUserName( $notification['extra']) . '">Profile</button>
+    </div>
+</div>';
+                    echo '
                                 </div>
                         </div>';
                 }
@@ -61,6 +74,15 @@ echo returnHeader();
             ?>
         </div>
 </body>
+<script src="./js/interactSearch.js"></script>
 <script src="./js/handle_notification.js"></script>
 <script src="https://kit.fontawesome.com/b1c6e6c59e.js" crossorigin="anonymous"></script>
 </html>
+
+<script>
+    function hide(e) {
+        console.log(e);
+        e.parentElement.parentElement.classList.add('hidden');
+
+    }
+</script>

@@ -59,7 +59,7 @@ function toggle_like($postId)
         $stmt = $conn->prepare("INSERT INTO likes (user_id, post_id, like_timestamp) VALUES (?, ?, ?)");
         $txtc = "Your post has been liked by " . $user_data['username'];
         $type = "like";
-        CreateNotification($post_author_id, $postId,$type, $txtc, $user_data['user_id']);
+        CreateNotification($post_author_idt, $postId,$type, $txtc, $user_data['user_id']);
         $stmt->bind_param("iii", $userId, $postId, $liketime);
         $stmt->execute();
         $stmt->close();

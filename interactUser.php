@@ -34,20 +34,24 @@ function createNewRelation($user1, $user2)
         return false;
     }
     global $conn;
-    $check_if_relation_exists = "SELECT * from relations WHERE ((req_from = ? AND req_to = ?) OR (req_from = ? AND req_to = ?)) LIMIT 1";
-    $stmt = $conn->prepare($check_if_relation_exists);
-    $stmt->bind_param('ssss', $user1, $user2, $user2, $user1);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $check_if_relation_exists = "SELECT * from relations WHERE ((req_from = ? AND req_to = ?) OR (req_from = ? AND req_to = ?))";
+    $stmt0 = $conn->prepare($check_if_relation_exists);
+    $stmt0->bind_param('iiii', $user1, $user2, $user2, $user1);
+    $stmt0->execute();
+    $result = $stmt0->get_result();
     $check_row = $result->fetch_assoc();
-    $stmt->close();
+    $stmt0->close();
     if ($result->num_rows > 0) {
         // Relation exists - If status is 0 turn it to 1 else ignore
         if ($check_row['status'] == 0) {
-            $stmt = $conn->prepare("UPDATE relations SET status = 1 WHERE (('req_from' = ? AND 'req_to' = ?) OR ('req_from' = ? AND 'req_to' = ?))");
-            $stmt->bind_param('ss', $user1, $user2);
+            $stmt = $conn->prepare("UPDATE relations SET status = 1 WHERE id=?");
+            $stmt->bind_param('i', $check_row['id']);
             $stmt->execute();
             $stmt->close();
+            $stmt_del = $conn->prepare("DELETE FROM notifications WHERE type='request' AND ( (user_id=? AND extref=?) OR (user_id=? AND extref=?) ) ");
+            $stmt_del->bind_param('iiii', $user1, $user2, $user2, $user1);
+            $stmt_del->execute();
+            $stmt_del->close();
         }
         return true;
     } else {
