@@ -22,8 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if($operation == 'unlike') {
         echo 'unliked';
     }
-} else {
-    echo "Invalid request method.";
 }
 
 
@@ -93,7 +91,7 @@ function relationStatus($user1, $user2)
     $stmt->close();
     if ($result->num_rows > 0) {
         // Return, [is_accepted, req_sent_by, req_sent_to]
-        return [$check_row['accepted'], $check_row['req_from'], $check_row['req_to']];
+        return true;
     } else {
         return false;
     }
