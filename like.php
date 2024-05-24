@@ -99,5 +99,8 @@ function returnFriendInfo($user_id)
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
+    if($result->num_rows == 0){
+        return null;
+    }
     return $result->fetch_assoc();
 }

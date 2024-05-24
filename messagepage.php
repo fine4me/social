@@ -19,7 +19,9 @@ date_default_timezone_set('Asia/Kathmandu');
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="./css/home.css">
-
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/search.css">
+    <link rel="stylesheet" href="./userProfile.php">
 </head>
 <body>
 <?php
@@ -50,7 +52,7 @@ echo returnHeader();
  </div>
      ';
  } else {
-     echo "Error: Unable to fetch friend information.";
+     echo '<div class="message-container its-empty">Start Adding Some Friends</div>';
  }
  ?>
 </div>
@@ -104,6 +106,12 @@ echo returnHeader();
         display: flex;
         flex-direction: column;
         gap: 2%;
+    }
+    .its-empty{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
     }
 </style>
 <script src="https://kit.fontawesome.com/b1c6e6c59e.js" crossorigin="anonymous"></script>

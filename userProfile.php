@@ -26,6 +26,11 @@ $postsData = returnPostsFromUserID($_GET['id']);
 $profileDetails = getUserDetails($_GET['id']);
 $userdata = checkLogin();
 ?>
+<div class="backbutton">
+    <a href="./home.php">
+        <span><i class="fa-solid fa-backward"></i></span>
+    </a>
+</div>
         <div class="profile-information">
             <span class="profile-pic-information">
                 <span class="profile-3 ">  </span>
@@ -105,6 +110,12 @@ $userdata = checkLogin();
                 ?>
         </div>
 </body>
+<style>
+    .backbutton{
+        margin-top: 1%;
+        margin-left: 1%;
+    }
+</style>
 <script src="./js/handle_likes.js"></script>
 <script src="./js/handle_notification.js"></script>
 <script src="./js/interactSearch.js"></script>
