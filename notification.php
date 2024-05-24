@@ -18,7 +18,6 @@ include_once ('./handlenotification.php');
 <?php
 $notifications = getNotifications();
 echo returnHeader();
-
 ?>
 <div class="backbutton">
     <a href="./home.php">
@@ -32,52 +31,52 @@ echo returnHeader();
     <button form="search" type="submit" class="find-friend-button"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
 </div>
     <div class="notification-container">
-            <?php
-            // Process notifications...
-            foreach ($notifications as $notification) {
-                // Handle each notification...
-                echo '<div class="notification-for-like">
-                            <div class="like-profile">
-                                <span class="profile-pic"></span>
-                            </div>';
-                if ($notification['type'] == 'like') {
-                    echo '     <div class="like-information">
-                                <!-- generate the whole line -->
-                                    ' . $notification['content'] . '<i class="fa-regular fa-heart always-red"></i>
-                                    <span class="like-time">
-                                    ' . $notification['created_time'] . '
-                                    </span>
-                                </div>
-                        </div>';
-                } else if ($notification['type'] == 'request') {
-                    $userDetail = getUserDetails( $notification['extra']);
-                    $username = $userDetail['username'];
-                    echo '     <div class="like-information"> ';
-                    echo '
-                                    ' . $notification['content'] . '<i class="fa-solid fa-user-group always-red" ></i>
-                                    <span class="like-time">
-                                    ' . $notification['created_time'] . '
-                                    </span>
-                                    ';
-                    echo '
-                                <div class="user-end" onclick="hide(this)">
-                                    <div class="add-user">
-                                        <button class="adduser user-add-view" id="add-user-' . $notification['extra'] . '">Accept</button>
-                                    </div>
-                                    <div class="view-profile">
-                                        <button class="userprofile user-add-view" id="view-user-' . $username . '">Profile</button>
-                                    </div>
-                                </div>';
-                    echo '
-                                </div>
-                        </div>';
-                }
+        <?php
+        // Process notifications...
+        foreach ($notifications as $notification) {
+            // Initialize the output string
+            $output = '<div class="notification-for-like">';
+            $output .= '<div class="like-profile">';
+            $output .= '<span class="profile-pic"></span>';
+            $output .= '</div>';
+
+            if ($notification['type'] != 'request') {
+                $output .= '<div class="like-information">';
+                $output .= $notification['content'] . '<i class="fa-regular fa-heart always-red"></i>';
+                $output .= '<span class="like-time">';
+                $output .= $notification['created_time'];
+                $output .= '</span>';
+                $output .= '</div>';
+            } else if ($notification['type'] == 'request') {
+                $userDetail = getUserDetails($notification['extra']);
+                $username = $userDetail['username'];
+
+                $output .= '<div class="like-information">';
+                $output .= $notification['content'] . '<i class="fa-solid fa-user-group always-red"></i>';
+                $output .= '<span class="like-time">';
+                $output .= $notification['created_time'];
+                $output .= '</span>';
+                $output .= '<div class="user-end" onclick="hide(this)">';
+                $output .= '<div class="add-user">';
+                $output .= '<button class="adduser user-add-view" id="add-user-' . $notification['extra'] . '">Accept</button>';
+                $output .= '</div>';
+                $output .= '<div class="view-profile">';
+                $output .= '<button class="userprofile user-add-view" id="view-user-' . $username . '">Profile</button>';
+                $output .= '</div>';
+                $output .= '</div>'; // Close user-end div
+                $output .= '</div>'; // Close like-information div
             }
-            ?>
-        </div>
+
+            $output .= '</div>'; // Close notification-for-like div
+
+            // Echo the output
+            echo $output;
+        }
+        ?>
 </body>
 <script src="./js/interactSearch.js"></script>
 <script src="./js/handle_notification.js"></script>
+<script src="./js/handle_likes.js"></script>
 <script src="https://kit.fontawesome.com/b1c6e6c59e.js" crossorigin="anonymous"></script>
 </html>
 

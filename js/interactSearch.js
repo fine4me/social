@@ -1,3 +1,4 @@
+const xhr = new XMLHttpRequest();
 function setEventsToProfile() {
     document.querySelectorAll('.user-add-view').forEach(element => {
         if (!element.dataset.eventAdded) {
@@ -9,9 +10,8 @@ function setEventsToProfile() {
 
 function checkInteraction(e) {
     const xhr = new XMLHttpRequest(); // Moved inside checkInteraction function
-    const username = e.target.id.split('-')[1]; // Adjusted index to 1
+    const username = e.target.id.split('-')[2]; // Adjusted index to 1
     const operation = e.target.id.split('-')[0];
-
     xhr.open('POST', './interactUser.php');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function() {

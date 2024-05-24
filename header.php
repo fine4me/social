@@ -30,6 +30,11 @@ function returnHeader()
                     </span>
                 </div>
                 <span>
+
+                    <a href="./messagepage.php"> <i class="fa-regular fa-message"></i> </a>
+
+                </span>
+                <span>
                     <a href="./logout.php">Logout</a>
                 </span>
             </div>

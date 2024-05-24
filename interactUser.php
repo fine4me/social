@@ -1,6 +1,7 @@
 <?php
 include_once './utils.php';
 include_once './like.php';
+include_once './handlenotification.php';
 global $userData;
 $userData = checkLogin();
 
@@ -8,12 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the username and operation from the POST data
     $userid = (int)$_POST['username'] ?? '';
     $operation = $_POST['operation'] ?? '';
+    $userid = (int)$userid;
     if($operation == 'add') {
         if (createNewRelation($userData['user_id'], $userid)) {
             echo 'ok';
         } else {
             http_response_code(500);
-            echo 'error';
+            echo 'error this code not working' . $userData['user_id'] . ' ' . $userid;
+            echo $userData['user_id'];
         }
         exit();
     } else if($operation == 'unlike') {
@@ -52,6 +55,10 @@ function createNewRelation($user1, $user2)
             $stmt_del->bind_param('iiii', $user1, $user2, $user2, $user1);
             $stmt_del->execute();
             $stmt_del->close();
+            $cont1 = "You are now Friends with  " . getUserDetails($user2)['username'];
+            $cont2 = "You are now Friends with  " . getUserDetails($user1)['username'];
+            CreateNotification($user1, null, 'message', $cont1,$user2);
+            CreateNotification($user2, null, 'message',$cont2, $user1);
         }
         return true;
     } else {
