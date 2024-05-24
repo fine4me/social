@@ -113,3 +113,24 @@ function flash()
     }
 }
 
+function returnNumberOfFriends($userID){
+    global $conn;
+    $stmt = $conn->prepare("SELECT COUNT(id) as total FROM relations WHERE (req_from = ? OR req_to = ?) AND status = 1;");
+    $stmt->bind_param("ii", $userID, $userID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    return $result->fetch_assoc()['total'];
+}
+
+
+function returnPostsFromUserID($userID)
+{
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM posts WHERE user_id = ? ORDER BY timestamp DESC;");
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    return $result;
+}
