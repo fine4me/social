@@ -131,7 +131,7 @@ function getEventTimestamp()
 }
 
 function getUserDetails($userId){
-    global $conn, $user_id;
+    global $conn;
     $query = "SELECT * FROM users WHERE id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $userId);
