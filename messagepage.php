@@ -19,7 +19,9 @@ date_default_timezone_set('Asia/Kathmandu');
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="./css/home.css">
-
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/search.css">
+    <link rel="stylesheet" href="./userProfile.php">
 </head>
 <body>
 <?php
@@ -33,7 +35,9 @@ echo returnHeader();
 <div class="search-friend-container">
 <?php
     // loop through return of returnFriendInfo($userdata['user_id']); with $row as each item
+$is_empty = true;
  foreach (returnFriendInfo($userdata['user_id']) as $row) {
+     $is_empty = false;
      if (is_array($row)) {
          if ($userdata['user_id'] == $row['req_from']) {
              $friendId = $row['req_to'];
@@ -46,14 +50,13 @@ echo returnHeader();
          <div class="profile">
              <span class="profile-pic">' . $friendInfo['pfp_url'] . '</span>
          </div>
-         <div class="username">' . $friendInfo['first_name']. '  ' .$friendInfo['last_name'] . '</div>
+         <div class="username">' . $friendInfo['first_name'] . '  ' . $friendInfo['last_name'] . '</div>
          <div class="message"><i class="fa-regular fa-message message-icon"></i></div>
-     </div>
-         ';
-
-    } else {
-        echo "Error: Unable to fetch friend information.";
-    }
+     </div>';
+     }
+ }
+ if ($is_empty) {
+     echo '<div class="message-container its-empty">Start Adding Some Friends</div>';
  }
  ?>
 </div>
@@ -107,6 +110,12 @@ echo returnHeader();
         display: flex;
         flex-direction: column;
         gap: 2%;
+    }
+    .its-empty{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
     }
 </style>
 <script src="https://kit.fontawesome.com/b1c6e6c59e.js" crossorigin="anonymous"></script>

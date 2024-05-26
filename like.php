@@ -99,10 +99,17 @@ function returnFriendInfo($user_id)
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
+<<<<<<< HEAD
     // Loop through each result and add each one to an array
     $rows = array();
     while ($row = $result->fetch_assoc()) {
         $rows[] = $row;
     }
     return $rows;
+=======
+    if($result->num_rows == 0){
+        return null;
+    }
+    return $result->fetch_assoc();
+>>>>>>> 522745e606fe27e9157e5ece2d26bd68486fc334
 }
