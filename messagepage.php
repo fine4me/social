@@ -31,26 +31,29 @@ echo returnHeader();
     </a>
 </div>
 <div class="search-friend-container">
- <?php
- $row = returnFriendInfo($userdata['user_id']);
- if (is_array($row)) {
-     if ($userdata['user_id'] == $row['req_from']) {
-         $friendId = $row['req_to'];
-     } else {
-         $friendId = $row['req_from'];
-     }
-     $friendInfo = getUserDetails($friendId);
-     echo '
- <div class="message-container">
-     <div class="profile">
-         <span class="profile-pic">' . $friendInfo['pfp_url'] . '</span>
+<?php
+    // loop through return of returnFriendInfo($userdata['user_id']); with $row as each item
+ foreach (returnFriendInfo($userdata['user_id']) as $row) {
+     if (is_array($row)) {
+         if ($userdata['user_id'] == $row['req_from']) {
+             $friendId = $row['req_to'];
+         } else {
+             $friendId = $row['req_from'];
+         }
+         $friendInfo = getUserDetails($friendId);
+         echo '
+     <div class="message-container">
+         <div class="profile">
+             <span class="profile-pic">' . $friendInfo['pfp_url'] . '</span>
+         </div>
+         <div class="username">' . $friendInfo['first_name']. '  ' .$friendInfo['last_name'] . '</div>
+         <div class="message"><i class="fa-regular fa-message message-icon"></i></div>
      </div>
-     <div class="username">' . $friendInfo['first_name']. '  ' .$friendInfo['last_name'] . '</div>
-     <div class="message"><i class="fa-regular fa-message message-icon"></i></div>
- </div>
-     ';
- } else {
-     echo "Error: Unable to fetch friend information.";
+         ';
+
+    } else {
+        echo "Error: Unable to fetch friend information.";
+    }
  }
  ?>
 </div>
